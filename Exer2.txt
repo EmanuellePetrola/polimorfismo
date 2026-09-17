@@ -1,0 +1,67 @@
+namespace Exercicio2
+{
+    class Funcionario
+    {
+        public string Nome { get; set; }
+        public double Salario { get; set; }
+
+        public virtual double CalcularBonusAnual()
+        {
+            return Salario * 0.10;
+        }
+    }
+
+    class Gerente : Funcionario
+    {
+        public override double CalcularBonusAnual()
+        {
+            return (Salario * 0.15) + 1000;
+        }
+    }
+
+    class Desenvolvedor : Funcionario
+    {
+        public override double CalcularBonusAnual()
+        {
+            return Salario * 0.12;
+        }
+    }
+}
+using Polimorfismo;
+using System;
+
+namespace Exercicio2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Funcionario funcionario = new Funcionario();
+            funcionario.Nome = "Vanderlan";
+            funcionario.Salario = 3000;
+
+            Gerente gerente = new Gerente();
+            gerente.Nome = "Gislaine";
+            gerente.Salario = 5000;
+
+            Desenvolvedor desenvolvedor = new Desenvolvedor();
+            desenvolvedor.Nome = "Adrian";
+            desenvolvedor.Salario = 4000;
+
+            Console.WriteLine("Funcionário: " + funcionario.Nome);
+            Console.WriteLine("Bônus anual: R$ " + funcionario.CalcularBonusAnual());
+
+            Console.WriteLine();
+
+            Console.WriteLine("Gerente: " + gerente.Nome);
+            Console.WriteLine("Bônus anual: R$ " + gerente.CalcularBonusAnual());
+
+            Console.WriteLine();
+
+            Console.WriteLine("Desenvolvedor: " + desenvolvedor.Nome);
+            Console.WriteLine("Bônus anual: R$ " + desenvolvedor.CalcularBonusAnual());
+
+            Console.ReadKey();
+        }
+    }
+}
