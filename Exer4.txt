@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+
+abstract class INotificacao
+{
+    public abstract void Enviar();
+}
+
+class NotificacaoEmail : INotificacao
+{
+    public override void Enviar()
+    {
+        Console.WriteLine("Enviando notificação por Email...");
+    }
+
+    public void Enviar(string anexo)
+    {
+        Console.WriteLine("Enviando Email com anexo: " + anexo);
+    }
+}
+
+class NotificacaoSMS : INotificacao
+{
+    public override void Enviar()
+    {
+        Console.WriteLine("Enviando notificação por SMS...");
+    }
+}
+
+class NotificacaoPush : INotificacao
+{
+    public override void Enviar()
+    {
+        Console.WriteLine("Enviando notificação Push para o App...");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<INotificacao> lista = new List<INotificacao>();
+
+        lista.Add(new NotificacaoEmail());
+        lista.Add(new NotificacaoSMS());
+        lista.Add(new NotificacaoPush());
+
+        foreach (INotificacao item in lista)
+        {
+            item.Enviar();
+        }
+
+        Console.WriteLine();
+
+        NotificacaoEmail email = new NotificacaoEmail();
+
+        email.Enviar();
+        email.Enviar("arquivo.pdf");
+
+        Console.ReadKey();
+    }
+}
